@@ -27,6 +27,8 @@ namespace Task2
 
         public Consultant Consultant { get; set; }
 
+        public Meneger Meneger { get; set; }     
+
         private ObservableCollection<ClientForBank> _clients = new ObservableCollection<ClientForBank>();
 
         public MainWindow()
@@ -37,6 +39,9 @@ namespace Task2
 
             Consultant = new Consultant();
 
+            Meneger = new Meneger();
+
+            //DataClients.ItemsSource = Bank.clients;
             DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
         }
 
@@ -49,9 +54,9 @@ namespace Task2
         {
             var client = DataClients.SelectedItem as Client;
 
-            if (client != null) client.Telefon = EditTelefon_TextBox.Text;
+            //if (client != null) client.Telefon = EditTelefon_TextBox.Text;
 
-            else ShowStatusBarText("Выберите клиента");
+            //else ShowStatusBarText("Выберите клиента");
 
         }
 
@@ -118,17 +123,19 @@ namespace Task2
 
                     NewClient_Button.IsEnabled = false;
 
-                    // DataClients.ItemsSource = ConvertClient(_clients);
-
-                    EditName_Button.IsEnabled = false;
-
-                    EditSecondName_Button.IsEnabled = false;
-
-                    EditMiddleName_Button.IsEnabled = false;
-
-                    EditSeriesAndPassportNumber_Button.IsEnabled = false;
-
+                    
                     DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
+
+
+                    //PanelEditClient.EditName_Button.IsEnabled = false;
+
+                    //EditSecondName_Button.IsEnabled = false;
+
+                    //EditMiddleName_Button.IsEnabled = false;
+
+                    //EditSeriesAndPassportNumber_Button.IsEnabled = false;
+
+                    //DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
 
                     break;
 
@@ -136,15 +143,19 @@ namespace Task2
 
                     NewClient_Button.IsEnabled = true;
 
-                    EditName_Button.IsEnabled = true;
-
-                    EditSecondName_Button.IsEnabled = true;
-
-                    EditMiddleName_Button.IsEnabled = true;
-
-                    EditSeriesAndPassportNumber_Button.IsEnabled = true;
-
+                    
                     DataClients.ItemsSource = Bank.GetData(AccessLevel.Menager);
+                     
+
+                    //EditName_Button.IsEnabled = true;
+
+                    //EditSecondName_Button.IsEnabled = true;
+
+                    //EditMiddleName_Button.IsEnabled = true;
+
+                    //EditSeriesAndPassportNumber_Button.IsEnabled = true;
+
+                    //DataClients.ItemsSource = Bank.GetData(AccessLevel.Menager);
 
                     break;
 
@@ -166,6 +177,24 @@ namespace Task2
             //}
 
             //else ShowStatusBarText("Выберите клиента");
+        }
+
+        private void ClientViewSelection(object sender, SelectionChangedEventArgs e)
+        {
+            Client currentClient = DataClients.SelectedItem as ClientForBank;
+
+            if (currentClient != null)
+            {
+                switch (AccessLevel_ComboBox.SelectedIndex)
+                {
+                    case 0:
+                        PanelEdit.Content = Consultant.ViewClientData(currentClient);
+                        break;
+                    case 1:
+                        PanelEdit.Content = Meneger.ViewClientData(currentClient);
+                        break;
+                }
+            }
         }
 
         /// <summary>

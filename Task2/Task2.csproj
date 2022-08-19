@@ -83,6 +83,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\ClientForBank.cs" />
     <Compile Include="Models\Consultant.cs" />
+    <Compile Include="Models\Meneger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

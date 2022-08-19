@@ -9,8 +9,7 @@
         Height="760" Width="1280"
         WindowStartupLocation="CenterScreen"
         MinWidth="1280" MinHeight="700" WindowStyle="None">
-    
-   
+
 
     <Grid ShowGridLines="False" >
         <Grid.RowDefinitions>
@@ -65,8 +64,8 @@
             </StatusBarItem>
         </StatusBar>
 
-        <!--Панель менаджера-->
-        <StackPanel x:Name="PanelManager" Grid.Row="1" Grid.Column="0"
+        <!--Панель информации о клиенте-->
+        <StackPanel x:Name="PanelInfo" Grid.Row="1" Grid.Column="0"
                     Margin="5 0 0 0"
                     Orientation="Vertical" 
                     HorizontalAlignment="Right">

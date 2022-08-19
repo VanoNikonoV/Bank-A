@@ -9,7 +9,13 @@ namespace Task2
     public class Consultant : IClientDataMonitor
     {
         public Consultant() {  }
-      
+
+        /// <summary>
+        /// Метод редактирования номера телефона
+        /// </summary>
+        /// <param name="client">Клент чей номер необходимо отредактировать</param>
+        /// <param name="newData">Новый номер</param>
+        /// <returns>Клент с новым номером</returns>
         public Client EditeClient(Client client, string newData)
         {
             client.Telefon = newData;
@@ -17,14 +23,28 @@ namespace Task2
             return client;
         }
 
+        /// <summary>
+        /// Метод отображение информации о  клиенте
+        /// </summary>
+        /// <param name="client">Выбранный клиент</param>
+        /// <returns>Клине с скрытыми данными</returns>
         public Client ViewClientData(Client client)
         {
-            string concealmentOfSeriesAndPassportNumber = ConcealmentOfSeriesAndPassportNumber(client.SeriesAndPassportNumber);
 
-            return client;
+            Client viewClient = new Client(client.FirstName, 
+                                client.MiddleName, 
+                                client.SecondName, 
+                                client.Telefon, 
+                                ConcealmentOfSeriesAndPassportNumber(client.SeriesAndPassportNumber));
+            return viewClient;
                     
         }
 
+        /// <summary>
+        /// Сокрыте паспортных данных клиента
+        /// </summary>
+        /// <param name="number">Паспорные данные</param>
+        /// <returns>Скрытые данные либо "нет данных"</returns>
         private string ConcealmentOfSeriesAndPassportNumber(string number)
         {
             if (number.Length > 0 && number != null && number != String.Empty)

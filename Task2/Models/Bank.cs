@@ -13,7 +13,7 @@ namespace Task2
     {
         //public AccessLevel AccessLevel { get; set; } = AccessLevel.Consultant;
 
-        private ObservableCollection<Client> clients { get; set; } 
+        public ObservableCollection<Client> clients { get; set; } 
 
         public Bank()
         {
@@ -72,21 +72,25 @@ namespace Task2
         {
             ObservableCollection<ClientForBank> temp = new ObservableCollection<ClientForBank>();
 
-            if (level == AccessLevel.Consultant)
+            switch (level)
             {
-                foreach (Client forBank in clients)
-                {
-                    temp.Add(new ClientForBank(forBank, level));
-                }
-                return temp;
-            }
-            else // (level == AccessLevel.Menager)
-            {
-                foreach (Client forBank in clients)
-                {
-                    temp.Add(new ClientForBank(forBank, level));
-                }
-                return temp;
+                case AccessLevel.Consultant:
+
+                    foreach (Client forBank in clients)
+                    {
+                        temp.Add(new ClientForBank(forBank, level));
+                    }
+                    return temp;
+
+                case AccessLevel.Menager:
+
+                    foreach (Client forBank in clients)
+                    {
+                        temp.Add(new ClientForBank(forBank, level));
+                    }
+                    return temp;
+
+                default: return temp;
             }
         }
 
