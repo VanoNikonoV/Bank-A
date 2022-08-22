@@ -34,12 +34,14 @@ namespace Task1
 
             DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
 
-            //сокрытие не функциональных кнопок
+            #region Сокрытие не функциональных кнопок
+            
             EditName_Button.IsEnabled = false;
             EditMiddleName_Button.IsEnabled =false;
             EditSecondName_Button.IsEnabled = false;
             EditSeriesAndPassportNumber_Button.IsEnabled=false;
             NewClient_Button.IsEnabled = false;
+            #endregion
 
         }
 

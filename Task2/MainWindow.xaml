@@ -12,181 +12,7 @@
 
     <Window.Resources>
         
-        <DataTemplate x:Key="PanelEditClient">
-
-            <StackPanel x:Name="PanelManager"
-                    Margin="5 0 0 0"
-                    Orientation="Vertical" 
-                    HorizontalAlignment="Right">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="135"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="Имя" FontSize="18" 
-                           Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                           VerticalAlignment="Bottom"/>
-                    <TextBox x:Name="EditName_TextBox" 
-                         FontSize="18" Width="135"
-                         Text="{Binding Path=FirstName, Mode=OneWay}"
-                         Grid.Column="0" Grid.Row="1"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center"/>
-                    <Button x:Name="EditName_Button" 
-                        Grid.Column="2" Grid.Row="1"
-                        Background="Black" 
-                        BorderBrush="{x:Null}"
-                        Cursor="Hand" 
-                        Click="EditName_Button_Clik">
-                        <materialDesign:PackIcon Kind="Edit" Width="25" 
-                                             Height="25" 
-                                             HorizontalAlignment="Center"/>
-                    </Button>
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="135"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="Отчество" FontSize="18" 
-                           Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                           VerticalAlignment="Bottom"/>
-                    <TextBox x:Name="EditMiddleName" FontSize="18" Width="135"
-                         Text="{Binding Path=MiddleName, Mode=OneWay}"
-                         Grid.Column="0" Grid.Row="1"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" Cursor="Arrow"/>
-                    <Button x:Name="EditMiddleName_Button"
-                        Grid.Column="2" Grid.Row="1"
-                        Background="Black" 
-                        BorderBrush="{x:Null}"
-                        Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Edit" Width="25" 
-                                             Height="25" 
-                                             HorizontalAlignment="Center"/>
-                    </Button>
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="135"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="Фамилия" FontSize="18" 
-                           Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                           VerticalAlignment="Bottom"/>
-                    <TextBox x:Name="EditSecondName" FontSize="18" Width="135"
-                         Text="{Binding Path=SecondName, Mode=OneWay}"
-                         Grid.Column="0" Grid.Row="1"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center"/>
-                    <Button x:Name="EditSecondName_Button"
-                        Grid.Column="2" Grid.Row="1"
-                        Background="Black" 
-                        BorderBrush="{x:Null}"
-                        Cursor="Hand" >
-                        <materialDesign:PackIcon Kind="Edit" Width="25" 
-                                             Height="25" 
-                                             HorizontalAlignment="Center"/>
-                    </Button>
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="135"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="Серия и номер паспорта" FontSize="16" 
-                           Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                           VerticalAlignment="Center"/>
-                    <TextBox x:Name="EditSeriesAndPassportNumber" 
-                         FontSize="18"
-                         Width="135"
-                         Text="{Binding Path=SeriesAndPassportNumber, 
-                                Mode=OneWay}"
-                         Grid.Column="0" Grid.Row="1"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" Cursor="Arrow"/>
-                    <Button x:Name="EditSeriesAndPassportNumber_Button" 
-                        Grid.Column="2" Grid.Row="1"
-                        Background="Black" 
-                        BorderBrush="{x:Null}"
-                        Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Edit" Width="25" 
-                                             Height="25" 
-                                             HorizontalAlignment="Center"/>
-                    </Button>
-                </Grid>
-
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="135"/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50"/>
-                        <RowDefinition Height="50"/>
-                    </Grid.RowDefinitions>
-
-                    <TextBlock Text="Телефон" FontSize="18" 
-                           Grid.Column="0" Grid.Row="0"
-                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
-                           VerticalAlignment="Center"/>
-
-                    <TextBox x:Name="EditTelefon_TextBox"
-                         FontSize="18" Width="135"
-                         Text="{Binding Path=Telefon, 
-                                ValidatesOnDataErrors=True,
-                                UpdateSourceTrigger=PropertyChanged,
-                                Mode=OneWay}"
-                         Grid.Column="0" Grid.Row="1"
-                         HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" Cursor="Arrow"/>
-                    <Button x:Name="ManagerEditTelefon_Button" 
-                        Grid.Column="2" Grid.Row="1"
-                        Background="Black" 
-                        BorderBrush="{x:Null}"
-                        Click="EditTelefon_Button"
-                        Cursor="Hand">
-                        <materialDesign:PackIcon Kind="Edit" Width="25" 
-                                             Height="25" 
-                                             HorizontalAlignment="Center"/>
-                    </Button>
-
-                </Grid>
-            </StackPanel>
-
-        </DataTemplate>
+       
         
     </Window.Resources>
     
@@ -251,11 +77,182 @@
         </StatusBar>
 
         <!--Панель менаджера-->
-        <ContentControl x:Name="PanelEdit"
-                        Grid.Row="1" Grid.Column="0" 
-                        ContentTemplate="{StaticResource PanelEditClient}"/>
-                        <!--Content="{Binding ElementName=DataClients, Path=SelectedItem}"-->
-                        
+        <StackPanel x:Name="PanelInfo" Grid.Row="1" Grid.Column="0"
+                    Margin="5 0 0 0"
+                    Orientation="Vertical" 
+                    HorizontalAlignment="Right">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Имя" FontSize="18" 
+                           Grid.Column="0" Grid.Row="0"
+                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom"/>
+                <TextBox x:Name="EditPanelManagerName_TextBox" 
+                         FontSize="18" Width="135"
+                         Text="{Binding ElementName=DataClients, 
+                         Path=SelectedItem.FirstName, Mode=OneWay}"
+                         Grid.Column="0" Grid.Row="1"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center"/>
+                <Button x:Name="EditName_Button" 
+                        Grid.Column="2" Grid.Row="1"
+                        Background="Black" 
+                        BorderBrush="{x:Null}"
+                        Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Edit" Width="25" 
+                                             Height="25" 
+                                             HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Отчество" FontSize="18" 
+                           Grid.Column="0" Grid.Row="0"
+                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom"/>
+                <TextBox x:Name="EditMiddleName" FontSize="18" Width="135"
+                         Text="{Binding ElementName=DataClients, 
+                         Path=SelectedItem.MiddleName, Mode=OneWay}"
+                         Grid.Column="0" Grid.Row="1"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" Cursor="Arrow"/>
+                <Button x:Name="EditMiddleName_Button"
+                        Grid.Column="2" Grid.Row="1"
+                        Background="Black" 
+                        BorderBrush="{x:Null}"
+                        Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Edit" Width="25" 
+                                             Height="25" 
+                                             HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Фамилия" FontSize="18" 
+                           Grid.Column="0" Grid.Row="0"
+                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                           VerticalAlignment="Bottom"/>
+                <TextBox x:Name="EditSecondName" FontSize="18" Width="135"
+                         Text="{Binding ElementName=DataClients, 
+                         Path=SelectedItem.SecondName, Mode=OneWay}"
+                         Grid.Column="0" Grid.Row="1"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center"/>
+                <Button x:Name="EditSecondName_Button"
+                        Grid.Column="2" Grid.Row="1"
+                        Background="Black" 
+                        BorderBrush="{x:Null}"
+                        Cursor="Hand" >
+                    <materialDesign:PackIcon Kind="Edit" Width="25" 
+                                             Height="25" 
+                                             HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Серия и номер паспорта" FontSize="16" 
+                           Grid.Column="0" Grid.Row="0"
+                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
+                <TextBox x:Name="EditSeriesAndPassportNumber" 
+                         FontSize="18"
+                         Width="135"
+                         Text="{Binding ElementName=DataClients, 
+                                Path=SelectedItem.SeriesAndPassportNumber, 
+                                Mode=OneWay}"
+                         Grid.Column="0" Grid.Row="1"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" Cursor="Arrow"/>
+                <Button x:Name="EditSeriesAndPassportNumber_Button" 
+                        Grid.Column="2" Grid.Row="1"
+                        Background="Black" 
+                        BorderBrush="{x:Null}"
+                        Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Edit" Width="25" 
+                                             Height="25" 
+                                             HorizontalAlignment="Center"/>
+                </Button>
+            </Grid>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="135"/>
+                    <ColumnDefinition Width="5"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Телефон" FontSize="18" 
+                           Grid.Column="0" Grid.Row="0"
+                           Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                           VerticalAlignment="Center"/>
+
+                <TextBox x:Name="EditTelefon_TextBox"
+                         FontSize="18" Width="135"
+                         Text="{Binding ElementName=DataClients, 
+                                Path=SelectedItem.Telefon, 
+                                ValidatesOnDataErrors=True,
+                                UpdateSourceTrigger=PropertyChanged,
+                                Mode=OneWay}"
+                         Grid.Column="0" Grid.Row="1"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" Cursor="Arrow"/>
+                <Button x:Name="ManagerEditTelefon_Button" 
+                        Grid.Column="2" Grid.Row="1"
+                        Background="Black" 
+                        BorderBrush="{x:Null}"
+                        Click="EditTelefon_Button"
+                        Cursor="Hand">
+                    <materialDesign:PackIcon Kind="Edit" Width="25" 
+                                             Height="25" 
+                                             HorizontalAlignment="Center"/>
+                </Button>
+
+            </Grid>
+        </StackPanel>
+
         <!--Инструментальная панель-->
         <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#FF679CC9">
             <Grid.ColumnDefinitions>
