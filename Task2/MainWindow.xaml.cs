@@ -181,19 +181,19 @@ namespace Task2
         }
 
         /// <summary>
-        /// Метод добавления нового клиента
+        /// Метод добавления нового клиенита
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        //private void NewClient_Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    NewClientWindow _windowNewClient = new NewClientWindow();
+        private void NewClient_Button_Click(object sender, RoutedEventArgs e)
+        {
+            NewClientWindow _windowNewClient = new NewClientWindow();
 
-        //    _windowNewClient.DataContext = _clients;
+            _windowNewClient.DataContext = DataClients.ItemsSource; // нужно ли?
 
-        //    _windowNewClient.Owner = this;
+            _windowNewClient.Owner = this;
 
-        //    _windowNewClient.ShowDialog();
-        //}
+            _windowNewClient.ShowDialog();
+        }
     }
 }

@@ -292,8 +292,8 @@
 
                 <Button x:Name="NewClient_Button" ToolTip="Добавить нового клиента"
                 Background="{x:Null}" BorderBrush="{x:Null}"
-                Cursor="Hand" HorizontalAlignment="Left">
-                    <!--Click="NewClient_Button_Click"-->
+                Cursor="Hand" HorizontalAlignment="Left"
+                    Click="NewClient_Button_Click">
                     <materialDesign:PackIcon Kind="PlusBox" 
                                      Width="25" Height="25" HorizontalAlignment="Center" 
                                      Cursor="Hand" Foreground="#DD080808"/>
@@ -314,8 +314,8 @@
                       FontSize="20"
                       VerticalAlignment="Center"
                       SelectionChanged="AccessLevel_ComboBox_SelectionChanged">
-                <ComboBoxItem Content="Консультант" IsSelected="True"/>
-                <ComboBoxItem Content="Менеджер" />
+                <ComboBoxItem Content="Консультант" />
+                <ComboBoxItem Content="Менеджер" IsSelected="True"/>
             </ComboBox>
 
         </Grid>
