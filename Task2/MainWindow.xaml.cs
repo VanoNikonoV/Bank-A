@@ -1,20 +1,13 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Task1;
 
 namespace Task2
 {
@@ -23,26 +16,33 @@ namespace Task2
     /// </summary>
     public partial class MainWindow : Window
     {
-        public Bank Bank { get; set; }
+        public Clients ClientsBank { get; set; }
 
         public Consultant Consultant { get; set; }
 
         public Meneger Meneger { get; set; }     
 
-        private ObservableCollection<ClientForBank> _clients = new ObservableCollection<ClientForBank>();
-
         public MainWindow()
         {
-            Bank = new Bank();
+
+            ClientsBank = new Clients("data.csv");
+
+            Consultant = new Consultant(); 
+            
+            Meneger = new Meneger();
 
             InitializeComponent();
 
-            Consultant = new Consultant();
+            DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone());
 
-            Meneger = new Meneger();
+            #region Сокрытие не функциональных кнопок
 
-            //DataClients.ItemsSource = Bank.clients;
-            DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
+            EditName_Button.IsEnabled = false;
+            EditMiddleName_Button.IsEnabled = false;
+            EditSecondName_Button.IsEnabled = false;
+            EditSeriesAndPassportNumber_Button.IsEnabled = false;
+            NewClient_Button.IsEnabled = false;
+            #endregion
         }
 
         /// <summary>
@@ -54,7 +54,16 @@ namespace Task2
         {
             var client = DataClients.SelectedItem as Client;
 
-            if (client != null) Consultant.EditeClient(client, EditTelefon_TextBox.Text);
+            if (client != null)
+            {
+                //изменения в коллекции клиентов
+                Consultant.EditeClient(client, EditTelefon_TextBox.Text);
+
+                //изменения в коллекции банка, по ссылке менаджера
+                Client editClient = ClientsBank.First(i => i.ID == client.ID);
+
+                editClient.Telefon = EditTelefon_TextBox.Text;
+            }
 
             else ShowStatusBarText("Выберите клиента");
 
@@ -100,7 +109,7 @@ namespace Task2
 
                 using (StreamWriter sw = new StreamWriter(fileName, false, Encoding.Unicode))
                 {
-                    foreach (var emp in _clients)
+                    foreach (var emp in DataClients.ItemsSource)
                     {
                         sw.WriteLine(emp.ToString());
                     }
@@ -114,25 +123,35 @@ namespace Task2
             Application.Current.Shutdown();
         }
 
-       
         private void AccessLevel_ComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             switch (AccessLevel_ComboBox.SelectedIndex)
             {
                 case 0: //консультант
 
+                    #region Сокрытие не функциональных кнопок
+                    EditName_Button.IsEnabled = false;
+                    EditMiddleName_Button.IsEnabled = false;
+                    EditSecondName_Button.IsEnabled = false;
+                    EditSeriesAndPassportNumber_Button.IsEnabled = false;
                     NewClient_Button.IsEnabled = false;
-
-                    DataClients.ItemsSource = Bank.GetData(AccessLevel.Consultant);
-
+                    #endregion
+                    
+                    DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone()); 
 
                     break;
 
                 case 1: //менждер
 
+                    #region Активация функциональных кнопок   
+                    EditName_Button.IsEnabled = true;
+                    EditMiddleName_Button.IsEnabled = true;
+                    EditSecondName_Button.IsEnabled = true;
+                    EditSeriesAndPassportNumber_Button.IsEnabled = true;
                     NewClient_Button.IsEnabled = true;
+                    #endregion
 
-                    DataClients.ItemsSource = Bank.GetData(AccessLevel.Menager);
+                    DataClients.ItemsSource = Meneger.ViewClientsData(ClientsBank);
 
                     break;
 
@@ -146,32 +165,19 @@ namespace Task2
         {
             var client = DataClients.SelectedItem as Client;
 
-            //if (client != null)
-            //{
-            //    Client changedClient = Menager.EditNameClient(client, EditName_TextBox.Text);
+            if (client != null)
+            {
+                Client changedClient = Meneger.EditNameClient(client, EditName_TextBox.Text);
 
-            //    _clients.EditClient(_clients.IndexOf(client), changedClient);
-            //}
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+            }
 
-            //else ShowStatusBarText("Выберите клиента");
+            else ShowStatusBarText("Выберите клиента");
         }
 
         private void ClientViewSelection(object sender, SelectionChangedEventArgs e)
         {
-            Client currentClient = DataClients.SelectedItem as ClientForBank;
-
-            if (currentClient != null)
-            {
-                switch (AccessLevel_ComboBox.SelectedIndex)
-                {
-                    case 0:
-                        PanelInfo.DataContext = Consultant.ViewClientData(currentClient);
-                        break;
-                    case 1:
-                        PanelInfo.DataContext = Meneger.ViewClientData(currentClient);
-                        break;
-                }
-            }
+            PanelInfo.DataContext = DataClients.SelectedItem as Client;
         }
 
         /// <summary>

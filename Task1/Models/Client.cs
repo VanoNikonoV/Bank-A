@@ -38,11 +38,11 @@ namespace Task1
                     (firstName, middleName,
                      secondName, telefon,
                      seriesAndPassportNumber, Client.NextID());
-        public Client(string firstName, string midlleName, 
+        public Client(string firstName, string middleName, 
                       string secondName, string telefon, 
                       string seriesAndPassportNumber, int currentId)
 
-                      : this(firstName, midlleName, secondName, 
+                      : this(firstName, middleName, secondName, 
                              telefon, seriesAndPassportNumber) 
         {
             this.ID = currentId; 
@@ -84,7 +84,7 @@ namespace Task1
         }
         public int ID { get; private set; }
         
-        public virtual string SeriesAndPassportNumber
+        public string SeriesAndPassportNumber
         {
             get {return this.seriesAndPassportNumber;}
             private set

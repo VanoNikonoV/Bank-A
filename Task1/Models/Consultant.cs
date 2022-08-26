@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,17 +25,30 @@ namespace Task1
         }
 
         /// <summary>
-        /// Метод отображение информации о  клиенте
+        /// Возвращает коллекцию клиентов со скрытими данными
         /// </summary>
-        /// <param name="client">Выбранный клиент</param>
-        /// <returns>Клине с скрытыми данными</returns>
-        public Client ViewClientData(Client client)
-        {
-            string concealmentOfSeriesAndPassportNumber = ConcealmentOfSeriesAndPassportNumber(client.SeriesAndPassportNumber);
+        /// <returns>ObservableCollection<Client></returns>
+        public ObservableCollection<Client> ViewClientsData(ObservableCollection<Client> clients)
+        { 
+            ObservableCollection<Client> clientsForConsultant = new ObservableCollection<Client>();
 
-            return client;
-                    
+            foreach (Client client in clients)
+            {
+                string concealment = ConcealmentOfSeriesAndPassportNumber(client.SeriesAndPassportNumber);
+
+                Client temp = new Client(firstName: client.FirstName,
+                                        middleName: client.MiddleName,
+                                        secondName: client.SecondName,
+                                           telefon: client.Telefon,
+                           seriesAndPassportNumber: concealment,
+                                         currentId: client.ID);
+
+                clientsForConsultant.Add(temp);
+            }
+
+            return clientsForConsultant;
         }
+
         /// <summary>
         /// Сокрыте паспортных данных клиента
         /// </summary>

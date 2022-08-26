@@ -78,10 +78,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\AccessLevel.cs" />
-    <Compile Include="Models\Bank.cs" />
     <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\ClientForBank.cs" />
+    <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\Consultant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -9,7 +9,12 @@
         Height="760" Width="1280"
         WindowStartupLocation="CenterScreen"
         MinWidth="1280" MinHeight="700" WindowStyle="None">
-
+    
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Save"
+                        CanExecute="SaveCanExecute"
+                        Executed="SaveExecuted"/>
+    </Window.CommandBindings>
 
     <Grid ShowGridLines="False" >
         <Grid.RowDefinitions>
@@ -21,7 +26,6 @@
             <ColumnDefinition Width="210"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
 
 
         <!--Основная рабочая область-->
