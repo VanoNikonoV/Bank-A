@@ -189,11 +189,13 @@ namespace Task2
         {
             NewClientWindow _windowNewClient = new NewClientWindow();
 
-            _windowNewClient.DataContext = DataClients.ItemsSource; // нужно ли?
+            //_windowNewClient.DataContext = DataClients.ItemsSource; // нужно ли?
 
             _windowNewClient.Owner = this;
 
             _windowNewClient.ShowDialog();
+
+            ClientsBank.Add(_windowNewClient.NewClient);
         }
     }
 }

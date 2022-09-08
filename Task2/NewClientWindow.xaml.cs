@@ -8,10 +8,16 @@ namespace Task2
     /// </summary>
     public partial class NewClientWindow : Window
     {
-        private Clients _clients = new Clients();
+        //private Clients _clients = new Clients();
+        public Client NewClient { get; private set; }
+
         public NewClientWindow()
         {
             InitializeComponent();
+
+            NewClientPanel.DataContext = new Client();
+
+           
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
@@ -20,17 +26,12 @@ namespace Task2
 
         private void AddClient(object sender, RoutedEventArgs e)
         {
-            _clients = this.DataContext as Clients;
-
-            Client client = new Client(FirstNameTextBox.Text,
-                                       MidlleNameTextBox.Text,
-                                       SecondNameTextBox.Text,
-                                       TelefonTextBox.Text,
-                                       SeriesAndPassportNumberTextBox.Text);
-
-            //if (!IsValid(this)) return;
-
-            _clients.Add(client);
+            NewClient = new Client(FirstNameTextBox.Text,
+                                    MidlleNameTextBox.Text,
+                                    SecondNameTextBox.Text,
+                                    TelefonTextBox.Text,
+                                    SeriesAndPassportNumberTextBox.Text);
+            string b = FirstNameTextBox.Text;
 
             DialogResult = true;
         }

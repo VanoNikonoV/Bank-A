@@ -25,7 +25,7 @@ namespace Task1
         }
         #endregion
 
-        public Client() { } //для консультанта
+        public Client(): this("Имя", "Отчество", "Фамилия", "79000000000", "66 00 000000") { --id; }  //для консультанта
 
         public Client(string firstName,string middleName, 
                       string secondName, string telefon,

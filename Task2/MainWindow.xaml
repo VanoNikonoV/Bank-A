@@ -7,15 +7,15 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Height="760" Width="1280"
-        WindowStartupLocation="CenterScreen"
+        
         MinWidth="1280" MinHeight="700" WindowStyle="None">
 
     <Window.Resources>
-        
-       
-        
+
+
+
     </Window.Resources>
-    
+
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Save"
                         CanExecute="SaveCanExecute"
@@ -37,12 +37,16 @@
 
         <!--Основная рабочая область-->
         <Grid Grid.Row="1" Grid.Column="1" Margin="15" Background="White" Cursor="IBeam">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="89*"/>
+                <ColumnDefinition Width="951*"/>
+            </Grid.ColumnDefinitions>
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="200" ShadowDepth="10"/>
             </Grid.Effect>
 
             <ListView x:Name="DataClients" FontSize="18" Cursor="IBeam" 
-                      SelectionChanged="ClientViewSelection">
+                      SelectionChanged="ClientViewSelection" Grid.ColumnSpan="2">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="№" 
@@ -314,8 +318,8 @@
                       FontSize="20"
                       VerticalAlignment="Center"
                       SelectionChanged="AccessLevel_ComboBox_SelectionChanged">
-                <ComboBoxItem Content="Консультант" />
-                <ComboBoxItem Content="Менеджер" IsSelected="True"/>
+                <ComboBoxItem Content="Консультант" IsSelected="True"/>
+                <ComboBoxItem Content="Менеджер" />
             </ComboBox>
 
         </Grid>

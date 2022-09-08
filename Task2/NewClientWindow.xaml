@@ -11,8 +11,10 @@
         WindowStartupLocation="CenterScreen" Background="#7FFAFAFA"
         FocusManager.FocusedElement ="{Binding ElementName=TelefonTextBox}" 
         AllowsTransparency="True" WindowStyle="None">
+
     
-    <StackPanel>
+    
+    <StackPanel x:Name="NewClientPanel">
         <Border Width="400" Height="250" CornerRadius="20 20 20 20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="Black">
 
@@ -63,23 +65,32 @@
                         <TextBox x:Name="TelefonTextBox" TextWrapping="Wrap" 
                                  Width="150" FontFamily="Calibri"  Height="25"
                                  FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
-                            <!--<TextBox.Text>
-                                <Binding Path="Telefon" Source="{StaticResource New Client}"
-                                         UpdateSourceTrigger="LostFocus" Mode="OneWay">
+                            <TextBox.Text>
+                                <Binding Path="Telefon"
+                                         UpdateSourceTrigger="LostFocus" Mode="TwoWay">
                                     <Binding.ValidationRules>
                                         <DataErrorValidationRule/>
                                     </Binding.ValidationRules>
                                 </Binding>
-                            </TextBox.Text>-->
+                            </TextBox.Text>
                         </TextBox>
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Center">
                         <TextBlock Text="Серия и номер паспорта" FontSize="14" Padding="3"
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="SeriesAndPassportNumberTextBox" TextWrapping="Wrap" Text=""  
+                        <TextBox x:Name="SeriesAndPassportNumberTextBox" TextWrapping="Wrap"  
                                  Width="170" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow" />
+                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                            <TextBox.Text>
+                                <Binding Path="SeriesAndPassportNumber"
+                                     UpdateSourceTrigger="LostFocus" Mode="OneWay">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
 
                 </Grid>
@@ -94,25 +105,53 @@
                     <StackPanel Margin="10" Grid.Column="0" HorizontalAlignment="Left">
                         <TextBlock Text="Имя" FontSize="14" Padding="3"
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="FirstNameTextBox" TextWrapping="Wrap" Text=""  
+                        <TextBox x:Name="FirstNameTextBox" TextWrapping="Wrap" 
                                  Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow" />
+                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                            <TextBox.Text>
+                                <Binding Path="FirstName"
+                                         UpdateSourceTrigger="LostFocus" Mode="OneWay">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Left">
                         <TextBlock Text="Отчество" FontSize="14" Padding="3"
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="MidlleNameTextBox" TextWrapping="Wrap" Text=""  
+                        <TextBox x:Name="MidlleNameTextBox" TextWrapping="Wrap" 
                                  Width="120" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow" />
+                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                            <TextBox.Text>
+                                <Binding Path="MiddleName"
+                                         UpdateSourceTrigger="LostFocus" Mode="OneWay">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="2" HorizontalAlignment="Left">
                         <TextBlock Text="Фамилия" FontSize="14" Padding="3"
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="SecondNameTextBox" TextWrapping="Wrap" Text=""  
+                        <TextBox x:Name="SecondNameTextBox" TextWrapping="Wrap"  
                                  Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow" />
+                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                            <TextBox.Text>
+                                <Binding Path="SecondName"
+                                         UpdateSourceTrigger="LostFocus" Mode="OneWay">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                            
+                        </TextBox>
                     </StackPanel>
 
                 </Grid>
