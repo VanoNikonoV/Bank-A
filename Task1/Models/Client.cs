@@ -25,7 +25,7 @@ namespace Task1
         }
         #endregion
 
-        public Client(): this("Имя", "Отчество", "Фамилия", "79000000000", "66 00 000000") { --id; }  //для консультанта
+        public Client(): this("Имя", "Отчество", "Фамилия", "79000000000", "66 00 000000") { --id; } //для нового клиента
 
         public Client(string firstName,string middleName, 
                       string secondName, string telefon,
@@ -83,7 +83,6 @@ namespace Task1
             }
         }
         public int ID { get; private set; }
-        
         public string SeriesAndPassportNumber
         {
             get {return this.seriesAndPassportNumber;}
@@ -100,6 +99,7 @@ namespace Task1
         string middleName;
         string telefon;
         string seriesAndPassportNumber;
+        string error;
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -114,12 +114,17 @@ namespace Task1
         /// <returns></returns>
         public override string ToString()
         {
-            return ID.ToString() + "\t" + FirstName + "\t" + MiddleName  + "\t" + SecondName + "\t" + Telefon + "\t" + SeriesAndPassportNumber;
+            return ID.ToString() + "\t" 
+                    + FirstName + "\t" 
+                    + MiddleName  + "\t"
+                    + SecondName + "\t" 
+                    + Telefon + "\t" 
+                    + SeriesAndPassportNumber;
         }
 
-
-        private string error;
-
+        /// <summary>
+        /// Сообщает о наличии ощибки в поле
+        /// </summary>
         public string Error => error;
 
         public string this[string columnName]
@@ -128,26 +133,66 @@ namespace Task1
             {
                 string result = string.Empty;
 
+                error = string.Empty; 
+
                 switch (columnName)
                 {
                     case nameof(Telefon):
 
-
                         if (this.Telefon.Length == 0)
                         {
+                            error = "Нужно заполнить поле";
                             return result = "Нужно заполнить поле";
                         }
 
                         else if (!decimal.TryParse(this.Telefon, out decimal number))
                         {
+                            error = "Нужны числа";
                             return result = "Нужны числа";
                         }
 
                         else if (this.Telefon.Length > 11 || this.Telefon.Length < 11)
                         {
+                            error = "Номер должен состоять из 11 цифр";
                             return result = "Номер должен состоять из 11 цифр";
                         }
+                        break;
 
+                    case nameof(SeriesAndPassportNumber):
+
+                        if (this.SeriesAndPassportNumber.Length == 0)
+                        {
+                            error = "Нужно заполнить поле";
+                            return result = "Нужно заполнить поле";
+                        }
+                       
+                        break;
+
+                    case nameof(FirstName):
+
+                        if (this.FirstName.Length == 0)
+                        {
+                            error = "Нужно заполнить поле";
+                            return result = "Нужно заполнить поле";
+                        }
+                        break;
+
+                    case nameof(SecondName):
+
+                        if (this.SecondName.Length == 0)
+                        {
+                            error = "Нужно заполнить поле";
+                            return result = "Нужно заполнить поле";
+                        }
+                        break;
+
+                    case nameof(MiddleName):
+
+                        if (this.MiddleName.Length == 0)
+                        {
+                            error = "Нужно заполнить поле";
+                            return result = "Нужно заполнить поле";
+                        }
                         break;
                 }
                 return result;

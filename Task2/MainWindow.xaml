@@ -103,7 +103,10 @@
                 <TextBox x:Name="EditName_TextBox" 
                          FontSize="18" Width="135"
                          Text="{Binding ElementName=DataClients, 
-                         Path=SelectedItem.FirstName, Mode=OneWay}"
+                                 Path=SelectedItem.FirstName,
+                                 ValidatesOnDataErrors=True,
+                                 UpdateSourceTrigger=PropertyChanged, 
+                                 Mode=OneWay}"
                          Grid.Column="0" Grid.Row="1"
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center"/>
@@ -111,7 +114,8 @@
                         Grid.Column="2" Grid.Row="1"
                         Background="Black" 
                         BorderBrush="{x:Null}"
-                        Cursor="Hand" Click="EditName_Button_Clik">
+                        Cursor="Hand" 
+                        Click="EditName_Button_Clik">
                     <materialDesign:PackIcon Kind="Edit" Width="25" 
                                              Height="25" 
                                              HorizontalAlignment="Center"/>
@@ -133,17 +137,22 @@
                            Grid.Column="0" Grid.Row="0"
                            Grid.ColumnSpan="3" HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"/>
-                <TextBox x:Name="EditMiddleName" FontSize="18" Width="135"
+                <TextBox x:Name="EditMiddleName_TextBox" FontSize="18" Width="135"
                          Text="{Binding ElementName=DataClients, 
-                         Path=SelectedItem.MiddleName, Mode=OneWay}"
+                                 Path=SelectedItem.MiddleName,
+                                 ValidatesOnDataErrors=True,
+                                 UpdateSourceTrigger=PropertyChanged,
+                                 Mode=OneWay}"
                          Grid.Column="0" Grid.Row="1"
                          HorizontalAlignment="Center" 
-                         VerticalAlignment="Center" Cursor="Arrow"/>
+                         VerticalAlignment="Center" 
+                         Cursor="Arrow"/>
                 <Button x:Name="EditMiddleName_Button"
                         Grid.Column="2" Grid.Row="1"
                         Background="Black" 
                         BorderBrush="{x:Null}"
-                        Cursor="Hand">
+                        Cursor="Hand"
+                        Click="EditMiddleName_Button_Clik">
                     <materialDesign:PackIcon Kind="Edit" Width="25" 
                                              Height="25" 
                                              HorizontalAlignment="Center"/>
@@ -167,7 +176,10 @@
                            VerticalAlignment="Bottom"/>
                 <TextBox x:Name="EditSecondName" FontSize="18" Width="135"
                          Text="{Binding ElementName=DataClients, 
-                         Path=SelectedItem.SecondName, Mode=OneWay}"
+                                 Path=SelectedItem.SecondName, 
+                                 ValidatesOnDataErrors=True,
+                                 UpdateSourceTrigger=PropertyChanged,
+                                 Mode=OneWay}"
                          Grid.Column="0" Grid.Row="1"
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center"/>
@@ -201,7 +213,9 @@
                          FontSize="18"
                          Width="135"
                          Text="{Binding ElementName=DataClients, 
-                                Path=SelectedItem.SeriesAndPassportNumber, 
+                                Path=SelectedItem.SeriesAndPassportNumber,
+                                ValidatesOnDataErrors=True,
+                                UpdateSourceTrigger=PropertyChanged,
                                 Mode=OneWay}"
                          Grid.Column="0" Grid.Row="1"
                          HorizontalAlignment="Center" 

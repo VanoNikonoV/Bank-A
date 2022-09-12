@@ -12,8 +12,6 @@
         FocusManager.FocusedElement ="{Binding ElementName=TelefonTextBox}" 
         AllowsTransparency="True" WindowStyle="None">
 
-    
-    
     <StackPanel x:Name="NewClientPanel">
         <Border Width="400" Height="250" CornerRadius="20 20 20 20"
                 HorizontalAlignment="Center" VerticalAlignment="Stretch" Background="Black">
@@ -64,7 +62,10 @@
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
                         <TextBox x:Name="TelefonTextBox" TextWrapping="Wrap" 
                                  Width="150" FontFamily="Calibri"  Height="25"
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                                 FontSize="14" Background="#FFFAFAFA" 
+                                 Cursor="Arrow"
+                                 GotFocus="TextBox_GotFocus"
+                                 SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
                                 <Binding Path="Telefon"
                                          UpdateSourceTrigger="LostFocus" Mode="TwoWay">
@@ -81,7 +82,10 @@
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
                         <TextBox x:Name="SeriesAndPassportNumberTextBox" TextWrapping="Wrap"  
                                  Width="170" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                                 FontSize="14" Background="#FFFAFAFA" 
+                                 Cursor="Arrow"
+                                 GotFocus="TextBox_GotFocus"
+                                 SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
                                 <Binding Path="SeriesAndPassportNumber"
                                      UpdateSourceTrigger="LostFocus" Mode="OneWay">
@@ -107,7 +111,10 @@
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
                         <TextBox x:Name="FirstNameTextBox" TextWrapping="Wrap" 
                                  Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                                 FontSize="14" Background="#FFFAFAFA" 
+                                 Cursor="Arrow"
+                                 GotFocus="TextBox_GotFocus"
+                                 SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
                                 <Binding Path="FirstName"
                                          UpdateSourceTrigger="LostFocus" Mode="OneWay">
@@ -124,7 +131,10 @@
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
                         <TextBox x:Name="MidlleNameTextBox" TextWrapping="Wrap" 
                                  Width="120" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                                 FontSize="14" Background="#FFFAFAFA" 
+                                 Cursor="Arrow"
+                                 GotFocus="TextBox_GotFocus"
+                                 SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
                                 <Binding Path="MiddleName"
                                          UpdateSourceTrigger="LostFocus" Mode="OneWay">
@@ -141,7 +151,10 @@
                                    Foreground="LightGray" HorizontalAlignment="Center"/>
                         <TextBox x:Name="SecondNameTextBox" TextWrapping="Wrap"  
                                  Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" Cursor="Arrow">
+                                 FontSize="14" Background="#FFFAFAFA" 
+                                 Cursor="Arrow"
+                                 GotFocus="TextBox_GotFocus"
+                                 SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
                                 <Binding Path="SecondName"
                                          UpdateSourceTrigger="LostFocus" Mode="OneWay">

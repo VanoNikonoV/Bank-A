@@ -34,5 +34,15 @@ namespace Task2
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
                               currentId: client.ID);
         }
+
+        internal Client EditMiddleNameClient(Client client, string newMiddleName)
+        {
+            return new Client(firstName: client.FirstName,
+                             middleName: newMiddleName,
+                             secondName: client.SecondName,
+                                telefon: client.Telefon,
+                seriesAndPassportNumber: client.SeriesAndPassportNumber,
+                              currentId: client.ID);
+        }
     }
 }

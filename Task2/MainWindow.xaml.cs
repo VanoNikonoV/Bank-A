@@ -59,10 +59,14 @@ namespace Task2
                 //изменения в коллекции клиентов
                 Consultant.EditeClient(client, EditTelefon_TextBox.Text);
 
-                //изменения в коллекции банка, по ссылке менаджера
-                Client editClient = ClientsBank.First(i => i.ID == client.ID);
+                if (client.Error == String.Empty)
+                {
+                    //изменения в коллекции банка, по ссылке менаджера
+                    Client editClient = ClientsBank.First(i => i.ID == client.ID);
 
-                editClient.Telefon = EditTelefon_TextBox.Text;
+                    editClient.Telefon = EditTelefon_TextBox.Text;
+                }
+                else ShowStatusBarText("Исправте не корректные данные");
             }
 
             else ShowStatusBarText("Выберите клиента");
@@ -161,6 +165,11 @@ namespace Task2
             }
         }
 
+        /// <summary>
+        /// Метод редактирования имени клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditName_Button_Clik(object sender, RoutedEventArgs e)
         {
             var client = DataClients.SelectedItem as Client;
@@ -175,6 +184,30 @@ namespace Task2
             else ShowStatusBarText("Выберите клиента");
         }
 
+        /// <summary>
+        /// Метод редактирования отчества клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditMiddleName_Button_Clik(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            if (client != null)
+            {
+                Client changedClient = Meneger.EditMiddleNameClient(client, EditMiddleName_TextBox.Text);
+
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+            }
+
+            else ShowStatusBarText("Выберите клиента");
+        }
+
+        /// <summary>
+        /// Метод заполняющий панель данными выбранного клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClientViewSelection(object sender, SelectionChangedEventArgs e)
         {
             PanelInfo.DataContext = DataClients.SelectedItem as Client;
@@ -189,13 +222,13 @@ namespace Task2
         {
             NewClientWindow _windowNewClient = new NewClientWindow();
 
-            //_windowNewClient.DataContext = DataClients.ItemsSource; // нужно ли?
-
             _windowNewClient.Owner = this;
 
             _windowNewClient.ShowDialog();
 
             ClientsBank.Add(_windowNewClient.NewClient);
         }
+
+       
     }
 }
