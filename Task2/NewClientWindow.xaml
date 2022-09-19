@@ -11,6 +11,28 @@
         WindowStartupLocation="CenterScreen" Background="#7FFAFAFA"
         FocusManager.FocusedElement ="{Binding ElementName=TelefonTextBox}" 
         AllowsTransparency="True" WindowStyle="None">
+    <Window.Resources>
+        
+        <Style TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Background" Value="#FFFAFAFA"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="Cursor"  Value="Arrow"/>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="Foreground" Value="LightGray"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+
+        </Style>
+        
+    </Window.Resources>
 
     <StackPanel x:Name="NewClientPanel">
         <Border Width="400" Height="250" CornerRadius="20 20 20 20"
@@ -43,13 +65,11 @@
                                 VerticalAlignment="Top"  CornerRadius="0 0 10 10"
                                 Background="#ff474747">
                     <TextBlock Text="Новый клиент" 
-                               HorizontalAlignment="Center" 
-                               FontFamily="Calibri" 
                                FontSize="16" 
                                VerticalAlignment="Center"/>
                 </Border>
 
-                <Grid x:Name="Cl" Width="400" VerticalAlignment="Top" 
+                <Grid Width="400" VerticalAlignment="Top" 
                       RenderTransformOrigin="0.503,0.641" Margin="0,72,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -58,12 +78,9 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Margin="10" Grid.Column="0" HorizontalAlignment="Center">
-                        <TextBlock Text="Телефон" FontSize="14"  Padding="3"
-                                   Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="TelefonTextBox" TextWrapping="Wrap" 
-                                 Width="150" FontFamily="Calibri"  Height="25"
-                                 FontSize="14" Background="#FFFAFAFA" 
-                                 Cursor="Arrow"
+                        <TextBlock Text="Телефон"/>
+                        <TextBox x:Name="TelefonTextBox" 
+                                 Width="150"
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -78,12 +95,9 @@
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Center">
-                        <TextBlock Text="Серия и номер паспорта" FontSize="14" Padding="3"
-                                   Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="SeriesAndPassportNumberTextBox" TextWrapping="Wrap"  
-                                 Width="170" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" 
-                                 Cursor="Arrow"
+                        <TextBlock Text="Серия и номер паспорта"/>
+                        <TextBox x:Name="SeriesAndPassportNumberTextBox" 
+                                 Width="170"  
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -107,12 +121,9 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Margin="10" Grid.Column="0" HorizontalAlignment="Left">
-                        <TextBlock Text="Имя" FontSize="14" Padding="3"
-                                   Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="FirstNameTextBox" TextWrapping="Wrap" 
-                                 Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" 
-                                 Cursor="Arrow"
+                        <TextBlock Text="Имя"/>
+                        <TextBox x:Name="FirstNameTextBox"
+                                 Width="100" 
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -127,12 +138,9 @@
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="1" HorizontalAlignment="Left">
-                        <TextBlock Text="Отчество" FontSize="14" Padding="3"
-                                   Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="MidlleNameTextBox" TextWrapping="Wrap" 
-                                 Width="120" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" 
-                                 Cursor="Arrow"
+                        <TextBlock Text="Отчество" />
+                        <TextBox x:Name="MidlleNameTextBox"
+                                 Width="120"
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>
@@ -147,12 +155,9 @@
                     </StackPanel>
 
                     <StackPanel Margin="10" Grid.Column="2" HorizontalAlignment="Left">
-                        <TextBlock Text="Фамилия" FontSize="14" Padding="3"
-                                   Foreground="LightGray" HorizontalAlignment="Center"/>
-                        <TextBox x:Name="SecondNameTextBox" TextWrapping="Wrap"  
-                                 Width="100" FontFamily="Calibri" 
-                                 FontSize="14" Background="#FFFAFAFA" 
-                                 Cursor="Arrow"
+                        <TextBlock Text="Фамилия"/>
+                        <TextBox x:Name="SecondNameTextBox" 
+                                 Width="100" 
                                  GotFocus="TextBox_GotFocus"
                                  SelectionChanged="TextBox_SelectionChanged">
                             <TextBox.Text>

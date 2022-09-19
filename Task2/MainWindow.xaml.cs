@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,6 +36,8 @@ namespace Task2
 
             DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone());
 
+            ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
+
             #region Сокрытие не функциональных кнопок
 
             EditName_Button.IsEnabled = false;
@@ -43,6 +46,19 @@ namespace Task2
             EditSeriesAndPassportNumber_Button.IsEnabled = false;
             NewClient_Button.IsEnabled = false;
             #endregion
+        }
+
+        private void ClientsBank_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                Console.WriteLine("Here are the OLD items:");
+                foreach (Client p in e.OldItems)
+                {
+                    Console.WriteLine(p.ToString());
+                }
+                Console.WriteLine();
+            }
         }
 
         /// <summary>
