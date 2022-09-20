@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using Task1;
 
-namespace Task2
+namespace Task3
 {
     public class Meneger:Consultant, IClientDataMonitor
     {
         /// <summary>
-        /// Возвращает коллекцию клиентов со скрытими данными
+        /// Возвращает коллекцию клиентов
         /// </summary>
         /// <returns>ObservableCollection<Client></returns>
         public new ObservableCollection<Client> ViewClientsData(ObservableCollection<Client> clients)
@@ -32,27 +32,19 @@ namespace Task2
                              secondName: client.SecondName,
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
-                              currentId: client.ID);
+                              currentId: client.ID,
+                              isChanged: true);
         }
 
-        public Client EditMiddleNameClient(Client client, string newMiddleName)
+        internal Client EditMiddleNameClient(Client client, string newMiddleName)
         {
             return new Client(firstName: client.FirstName,
                              middleName: newMiddleName,
                              secondName: client.SecondName,
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
-                              currentId: client.ID);
-        }
-
-        public Client EditSecondNameClient(Client client, string newSecondName)
-        {
-            return new Client( firstName: client.FirstName,
-                              middleName: client.MiddleName,
-                              secondName: newSecondName,
-                                 telefon: client.Telefon,
-                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
-                               currentId: client.ID);
+                              currentId: client.ID,
+                              isChanged: true);
         }
     }
 }

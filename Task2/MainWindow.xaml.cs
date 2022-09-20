@@ -36,8 +36,6 @@ namespace Task2
 
             DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone());
 
-            ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
-
             #region Сокрытие не функциональных кнопок
 
             EditName_Button.IsEnabled = false;
@@ -46,47 +44,6 @@ namespace Task2
             EditSeriesAndPassportNumber_Button.IsEnabled = false;
             NewClient_Button.IsEnabled = false;
             #endregion
-        }
-
-        private void ClientsBank_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
-            {
-                Console.WriteLine("Here are the OLD items:");
-                foreach (Client p in e.OldItems)
-                {
-                    Console.WriteLine(p.ToString());
-                }
-                Console.WriteLine();
-            }
-        }
-
-        /// <summary>
-        /// Метод редактирования номера телефона
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditTelefon_Button(object sender, RoutedEventArgs e)
-        {
-            var client = DataClients.SelectedItem as Client;
-
-            if (client != null)
-            {
-                //изменения в коллекции клиентов
-                Consultant.EditeClient(client, EditTelefon_TextBox.Text);
-
-                if (client.Error == String.Empty)
-                {
-                    //изменения в коллекции банка, по ссылке менаджера
-                    Client editClient = ClientsBank.First(i => i.ID == client.ID);
-
-                    editClient.Telefon = EditTelefon_TextBox.Text;
-                }
-                else ShowStatusBarText("Исправте не корректные данные");
-            }
-
-            else ShowStatusBarText("Выберите клиента");
-
         }
 
         /// <summary>
@@ -182,6 +139,35 @@ namespace Task2
         }
 
         /// <summary>
+        /// Метод редактирования номера телефона
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditTelefon_Button(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            if (client != null)
+            {
+                //изменения в коллекции клиентов
+                Consultant.EditeClient(client, EditTelefon_TextBox.Text);
+
+                // если присутствуют ощибки изменения на примутся
+                if (client.Error == String.Empty)
+                {
+                    //изменения в коллекции банка, по ID клиента
+                    Client editClient = ClientsBank.First(i => i.ID == client.ID);
+
+                    editClient.Telefon = EditTelefon_TextBox.Text;
+                }
+                else ShowStatusBarText("Исправте не корректные данные");
+            }
+
+            else ShowStatusBarText("Выберите клиента");
+
+        }
+
+        /// <summary>
         /// Метод редактирования имени клиента
         /// </summary>
         /// <param name="sender"></param>
@@ -215,7 +201,24 @@ namespace Task2
 
                 ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
             }
+            else ShowStatusBarText("Выберите клиента");
+        }
 
+        /// <summary>
+        /// Метод редактирования фамилии клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditSecondName_Button_Clik(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            if (client != null)
+            {
+                Client changedClient = Meneger.EditSecondNameClient(client, EditSecondName_TextBox.Text);
+
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+            }
             else ShowStatusBarText("Выберите клиента");
         }
 
@@ -242,9 +245,11 @@ namespace Task2
 
             _windowNewClient.ShowDialog();
 
-            ClientsBank.Add(_windowNewClient.NewClient);
+            if (_windowNewClient.DialogResult == true)
+            {
+                ClientsBank.Add(_windowNewClient.NewClient);
+            }
         }
 
-       
     }
 }
