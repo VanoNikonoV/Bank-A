@@ -38,10 +38,7 @@
 
         <!--Основная рабочая область-->
         <Grid Grid.Row="1" Grid.Column="1" Margin="15" Background="White" Cursor="IBeam">
-            <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="89*"/>
-                <ColumnDefinition Width="951*"/>
-            </Grid.ColumnDefinitions>-->
+   
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="200" ShadowDepth="10"/>
             </Grid.Effect>
@@ -63,11 +60,11 @@
                         <GridViewColumn Header="Телефон"
                                         DisplayMemberBinding="{Binding Path = Telefon}"/>
                         <GridViewColumn Header="Дата и время" 
-                                        DisplayMemberBinding="{Binding Path=DateOfEntry}"/>
-                        <GridViewColumn Header="Есть изменения" 
+                                        DisplayMemberBinding="{Binding Path=DateOfEntry, StringFormat= g}"/>
+                        <GridViewColumn Header="Изм." 
                                         CellTemplate="{StaticResource CheckBox_Changed}"/>
-                        <GridViewColumn Header="Что изменилось"
-                                        DisplayMemberBinding="{Binding Path=WhatHasChanged}"/>
+                        <!--<GridViewColumn Header="Что изменилось"
+                                        DisplayMemberBinding="{Binding Path=WhatHasChanged}"/>-->
                     </GridView>
                 </ListView.View>
             </ListView>
@@ -181,7 +178,7 @@
                            Grid.Column="0" Grid.Row="0"
                            Grid.ColumnSpan="3" HorizontalAlignment="Center" 
                            VerticalAlignment="Bottom"/>
-                <TextBox x:Name="EditSecondName" FontSize="18" Width="135"
+                <TextBox x:Name="EditSecondName_TextBox" FontSize="18" Width="135"
                          Text="{Binding ElementName=DataClients, 
                                  Path=SelectedItem.SecondName, 
                                  ValidatesOnDataErrors=True,
@@ -194,7 +191,8 @@
                         Grid.Column="2" Grid.Row="1"
                         Background="Black" 
                         BorderBrush="{x:Null}"
-                        Cursor="Hand" >
+                        Cursor="Hand" 
+                        Click="EditSecondName_Button_Clik">
                     <materialDesign:PackIcon Kind="Edit" Width="25" 
                                              Height="25" 
                                              HorizontalAlignment="Center"/>
@@ -216,7 +214,7 @@
                            Grid.Column="0" Grid.Row="0"
                            Grid.ColumnSpan="3" HorizontalAlignment="Center" 
                            VerticalAlignment="Center"/>
-                <TextBox x:Name="EditSeriesAndPassportNumber" 
+                <TextBox x:Name="EditSeriesAndPassportNumber_TextBox" 
                          FontSize="18"
                          Width="135"
                          Text="{Binding ElementName=DataClients, 
@@ -231,7 +229,8 @@
                         Grid.Column="2" Grid.Row="1"
                         Background="Black" 
                         BorderBrush="{x:Null}"
-                        Cursor="Hand">
+                        Cursor="Hand"
+                        Click="EditSeriesAndPassportNumber_Button_Clik">
                     <materialDesign:PackIcon Kind="Edit" Width="25" 
                                              Height="25" 
                                              HorizontalAlignment="Center"/>

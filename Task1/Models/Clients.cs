@@ -33,7 +33,7 @@ namespace Task1
         /// <param name="index">Индекс (с нуля) элемента, который требуется заменить</param>
         /// <param name="editClient">Отредактируемый клиент по указанному индексу</param>
         public void EditClient(int index, Client editClient)
-        {
+        {   
             SetItem(index, editClient);
         }
 

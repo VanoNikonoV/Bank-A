@@ -96,7 +96,6 @@ namespace Task2
 
         private void CloseWindows(object sender, RoutedEventArgs e)
         {
-            this.Close();
             Application.Current.Shutdown();
         }
 
@@ -150,7 +149,7 @@ namespace Task2
             if (client != null)
             {
                 //изменения в коллекции клиентов
-                Consultant.EditeClient(client, EditTelefon_TextBox.Text);
+                Consultant.EditeClient(client, EditTelefon_TextBox.Text.Trim());
 
                 // если присутствуют ощибки изменения на примутся
                 if (client.Error == String.Empty)

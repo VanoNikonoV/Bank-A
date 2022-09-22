@@ -20,8 +20,11 @@ namespace Task3
         public Client EditeClient(Client client, string newData)
         {
             client.Telefon = newData;
+
             client.DateOfEntry = DateTime.Now;
+
             client.IsChanged = true;
+
             return client;
         }
 

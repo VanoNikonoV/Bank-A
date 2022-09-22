@@ -36,13 +36,35 @@ namespace Task3
                               isChanged: true);
         }
 
-        internal Client EditMiddleNameClient(Client client, string newMiddleName)
+        public Client EditMiddleNameClient(Client client, string newMiddleName)
         {
             return new Client(firstName: client.FirstName,
                              middleName: newMiddleName,
                              secondName: client.SecondName,
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
+                              currentId: client.ID,
+                              isChanged: true);
+        }
+
+        public Client EditSecondNameClient(Client client, string newSecondName)
+        {
+            return new Client(firstName: client.FirstName,
+                              middleName: client.MiddleName,
+                              secondName: newSecondName,
+                                 telefon: client.Telefon,
+                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
+                               currentId: client.ID,
+                               isChanged: true);
+        }
+
+        public Client EditSeriesAndPassportNumberClient(Client client, string newSeriesAndPassportNumber)
+        {
+            return new Client(firstName: client.FirstName,
+                             middleName: client.MiddleName,
+                             secondName: client.SecondName,
+                                telefon: client.Telefon,
+                seriesAndPassportNumber: newSeriesAndPassportNumber,
                               currentId: client.ID,
                               isChanged: true);
         }

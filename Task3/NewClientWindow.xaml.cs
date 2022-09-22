@@ -29,11 +29,11 @@ namespace Task3
         {
             if (temp.Error == string.Empty)
             {
-                NewClient = new Client(FirstNameTextBox.Text,
-                                                    MidlleNameTextBox.Text,
-                                                    SecondNameTextBox.Text,
-                                                    TelefonTextBox.Text,
-                                                    SeriesAndPassportNumberTextBox.Text);
+                NewClient = new Client( FirstNameTextBox.Text.Trim(),
+                                        MidlleNameTextBox.Text.Trim(),
+                                        SecondNameTextBox.Text.Trim(),
+                                        TelefonTextBox.Text.Trim(),
+                                        SeriesAndPassportNumberTextBox.Text.Trim());
                 DialogResult = true;
             }
 

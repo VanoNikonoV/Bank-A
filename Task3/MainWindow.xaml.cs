@@ -2,6 +2,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,12 @@ namespace Task3
 
         public Consultant Consultant { get; set; }
 
-        public Meneger Meneger { get; set; }     
+        public Meneger Meneger { get; set; }    
+        
+        private bool isDirty = false;
 
         public MainWindow()
         {
-
             ClientsBank = new Clients("data.csv");
 
             Consultant = new Consultant(); 
@@ -50,43 +52,32 @@ namespace Task3
 
         private void ClientsBank_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            if (e.Action == NotifyCollectionChangedAction.Remove)
+            {
+                foreach (Client p in e.OldItems)
+                {
+                    Debug.Write($"Старое имя " + p.FirstName.ToString()); 
+                }
+                
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                foreach (Client p in e.NewItems)
+                {
+                    Debug.Write($"Новое имя " + p.FirstName.ToString());
+                }
+            }
+
+            if (e.Action == NotifyCollectionChangedAction.Replace)
             {
                 Console.WriteLine("Here are the OLD items:");
-                foreach (Client p in e.OldItems)
+                foreach (Client p in e.NewItems)
                 {
                     Console.WriteLine(p.ToString());
                 }
                 Console.WriteLine();
             }
-        }
-
-        /// <summary>
-        /// Метод редактирования номера телефона
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void EditTelefon_Button(object sender, RoutedEventArgs e)
-        {
-            var client = DataClients.SelectedItem as Client;
-
-            if (client != null)
-            {
-                //изменения в коллекции клиентов
-                Consultant.EditeClient(client, EditTelefon_TextBox.Text);
-
-                if (client.Error == String.Empty)
-                {
-                    //изменения в коллекции банка, по ссылке менаджера
-                    Client editClient = ClientsBank.First(i => i.ID == client.ID);
-
-                    editClient.Telefon = EditTelefon_TextBox.Text;
-                }
-                else ShowStatusBarText("Исправте не корректные данные");
-            }
-
-            else ShowStatusBarText("Выберите клиента");
-
         }
 
         /// <summary>
@@ -115,8 +106,12 @@ namespace Task3
 
         private void SaveCanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
-
-            e.CanExecute = true;
+            if (isDirty)
+            {
+                e.CanExecute = true;
+            }
+            else e.CanExecute = false;
+            
         }
 
         private void SaveExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -135,11 +130,12 @@ namespace Task3
                     }
                 }
             }
+
+            isDirty = false;
         }
 
         private void CloseWindows(object sender, RoutedEventArgs e)
         {
-            this.Close();
             Application.Current.Shutdown();
         }
 
@@ -181,6 +177,43 @@ namespace Task3
             }
         }
 
+        #region Редактирование данных о клиенте
+
+        /// <summary>
+        /// Метод редактирования номера телефона
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void EditTelefon_Button(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            string oldTelefon = client.Telefon;
+
+            if (client != null)
+            {
+                //изменения в коллекции клиентов
+                Consultant.EditeClient(client, EditTelefon_TextBox.Text.Trim());
+
+                if (client.Error == String.Empty)
+                {
+                    //изменения в коллекции банка, по ID клиента
+                    Client editClient = ClientsBank.First(i => i.ID == client.ID);
+
+                    editClient.Telefon = EditTelefon_TextBox.Text.Trim();
+
+                    isDirty = true;
+                }
+                else
+                {
+                    //Consultant.EditeClient(client, oldTelefon);
+
+                    ShowStatusBarText("Исправте не корректные данные");
+                }
+            }
+            else ShowStatusBarText("Выберите клиента");
+        }
+
         /// <summary>
         /// Метод редактирования имени клиента
         /// </summary>
@@ -192,9 +225,14 @@ namespace Task3
 
             if (client != null)
             {
-                Client changedClient = Meneger.EditNameClient(client, EditName_TextBox.Text);
+                Client changedClient = Meneger.EditNameClient(client, EditName_TextBox.Text.Trim());
 
-                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+                Debug.WriteLine(nameof(Meneger));
+
+                //ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+                ClientsBank.EditClient2(ClientsBank.IndexOf(client), changedClient);
+
+                isDirty = true;
             }
 
             else ShowStatusBarText("Выберите клиента");
@@ -211,13 +249,49 @@ namespace Task3
 
             if (client != null)
             {
-                Client changedClient = Meneger.EditMiddleNameClient(client, EditMiddleName_TextBox.Text);
+                Client changedClient = Meneger.EditMiddleNameClient(client, EditMiddleName_TextBox.Text.Trim());
 
                 ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+
+                isDirty = true;
             }
 
             else ShowStatusBarText("Выберите клиента");
         }
+
+        private void EditSecondName_Button_Clik(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            if (client != null)
+            {
+                Client changedClient = Meneger.EditSecondNameClient(client, EditSecondName_TextBox.Text.Trim());
+
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+
+                isDirty = true;
+            }
+
+            else ShowStatusBarText("Выберите клиента");
+        }
+
+        private void EditSeriesAndPassportNumber_Button_Clik(object sender, RoutedEventArgs e)
+        {
+            var client = DataClients.SelectedItem as Client;
+
+            if (client != null)
+            {
+                Client changedClient = Meneger.EditSeriesAndPassportNumberClient(client, EditSeriesAndPassportNumber_TextBox.Text.Trim());
+
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
+
+                isDirty = true;
+            }
+
+            else ShowStatusBarText("Выберите клиента");
+        }
+
+        #endregion
 
         /// <summary>
         /// Метод заполняющий панель данными выбранного клиента
@@ -248,6 +322,5 @@ namespace Task3
             }
         }
 
-       
     }
 }
