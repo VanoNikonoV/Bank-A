@@ -85,6 +85,7 @@
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Clients.cs" />
     <Compile Include="Models\Consultant.cs" />
+    <Compile Include="Models\InformationAboutChanges.cs" />
     <Compile Include="Models\Meneger.cs" />
     <Compile Include="NewClientWindow.xaml.cs">
       <DependentUpon>NewClientWindow.xaml</DependentUpon>

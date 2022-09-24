@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Task1;
+using static Task3.Clients;
 
 namespace Task3
 {
@@ -39,6 +41,8 @@ namespace Task3
             DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone());
 
             ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
+            
+            Debug.WriteLine(ClientsBank.InfoAboutChanges[0]);
 
             #region Сокрытие не функциональных кнопок
 
@@ -54,11 +58,17 @@ namespace Task3
         {
             if (e.Action == NotifyCollectionChangedAction.Remove)
             {
+
                 foreach (Client p in e.OldItems)
                 {
-                    Debug.Write($"Старое имя " + p.FirstName.ToString()); 
+                    Debug.Write($"Старое имя " + p.FirstName.ToString());
+                    
+                    InformationAboutChanges temp =  ClientsBank.InfoAboutChanges.First(i => i.ID_Client == p.ID);
+
+                    temp.TypeOfChanges = "Клиен был удалени";
+
                 }
-                
+
             }
 
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -131,6 +141,11 @@ namespace Task3
                 }
             }
 
+            foreach (var client in ClientsBank)
+            {
+                client.IsChanged = false;
+            }
+            // нужно как то обновить данные для консультанта
             isDirty = false;
         }
 
@@ -227,10 +242,13 @@ namespace Task3
             {
                 Client changedClient = Meneger.EditNameClient(client, EditName_TextBox.Text.Trim());
 
-                Debug.WriteLine(nameof(Meneger));
+                //InformationAboutChanges temp = ClientsBank.InfoAboutChanges.First(i => i.ID_Client == changedClient.ID);
 
-                //ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
-                ClientsBank.EditClient2(ClientsBank.IndexOf(client), changedClient);
+                string s = string.Format("{0} изменилось на  {1}", client.FirstName, EditName_TextBox.Text.Trim());
+
+                ClientsBank.InfoAboutChanges.Add(new InformationAboutChanges(client.ID, DateTime.Now, s, "замена", nameof(Meneger)));
+
+                ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
 
                 isDirty = true;
             }
@@ -300,7 +318,23 @@ namespace Task3
         /// <param name="e"></param>
         private void ClientViewSelection(object sender, SelectionChangedEventArgs e)
         {
+            Client temp = DataClients.SelectedItem as Client;
+
             PanelInfo.DataContext = DataClients.SelectedItem as Client;
+
+            List<InformationAboutChanges> t = new List<InformationAboutChanges>();
+
+            foreach (var item in ClientsBank.InfoAboutChanges)
+            {
+                if (temp != null)
+                {
+                    if (item.ID_Client == temp.ID) t.Add(item);
+                }
+                
+            }
+            //InformationAboutChanges d = ClientsBank.InfoAboutChanges.First(i => i.ID_Client == temp.ID);
+
+            СhangesClient.ItemsSource = t;
         }
 
         /// <summary>
@@ -319,6 +353,8 @@ namespace Task3
             if (_windowNewClient.DialogResult == true)
             {
                 ClientsBank.Add(_windowNewClient.NewClient);
+
+                isDirty = true;
             }
         }
 

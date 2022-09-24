@@ -33,6 +33,7 @@ namespace Task3
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
                               currentId: client.ID,
+                               dateTime: DateTime.Now,
                               isChanged: true);
         }
 
@@ -44,6 +45,7 @@ namespace Task3
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: client.SeriesAndPassportNumber,
                               currentId: client.ID,
+                               dateTime: DateTime.Now,
                               isChanged: true);
         }
 
@@ -55,6 +57,7 @@ namespace Task3
                                  telefon: client.Telefon,
                  seriesAndPassportNumber: client.SeriesAndPassportNumber,
                                currentId: client.ID,
+                                dateTime: DateTime.Now,
                                isChanged: true);
         }
 
@@ -66,6 +69,7 @@ namespace Task3
                                 telefon: client.Telefon,
                 seriesAndPassportNumber: newSeriesAndPassportNumber,
                               currentId: client.ID,
+                               dateTime: DateTime.Now,
                               isChanged: true);
         }
     }

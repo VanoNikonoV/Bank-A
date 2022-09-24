@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
@@ -6,11 +7,21 @@ using System.Windows;
 
 namespace Task3
 {
-    public class Clients : ObservableCollection<Client>, INotifyCollectionChanged
+    public partial class Clients : ObservableCollection<Client>, INotifyCollectionChanged
     {
+        /// <summary>
+        /// Коллекция для хранения информации об изменениях в записи о клиенте
+        /// </summary>
+        public ObservableCollection<InformationAboutChanges> InfoAboutChanges { get; set; }
+
         public Clients() {  }
 
-        public Clients(string path = "data.csv")  {  LoadData(path);  }
+        public Clients(string path = "data.csv")  
+        {
+            InfoAboutChanges = new ObservableCollection<InformationAboutChanges>();
+
+            LoadData(path);  
+        }
 
         /// <summary>
         /// Возвращает копию коллекции
@@ -57,11 +68,17 @@ namespace Task3
                         {
                             string[] line = reader.ReadLine().Split('\t');
 
-                            this.Add(new Client(firstName: line[1],
-                                               middleName: line[2],
-                                               secondName: line[3],
-                                                  telefon: line[4],
-                                  seriesAndPassportNumber: line[5]));
+                            Client temp = new Client(firstName: line[1],
+                                                    middleName: line[2],
+                                                    secondName: line[3],
+                                                       telefon: line[4],
+                                       seriesAndPassportNumber: line[5],
+                                                      dateTime: Convert.ToDateTime(line[6]),
+                                                     isChanged: false); //currentId: Convert.ToInt32(line[0]),
+
+                            this.Add(temp);
+
+                           // InfoAboutChanges.Add(new InformationAboutChanges(temp.ID, temp.DateOfEntry));
                         }
                     }
                    
@@ -81,7 +98,6 @@ namespace Task3
             }
 
         }
-
 
     }
 }

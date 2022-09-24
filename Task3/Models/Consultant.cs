@@ -46,6 +46,7 @@ namespace Task3
                                            telefon: client.Telefon,
                            seriesAndPassportNumber: concealment,
                                          currentId: client.ID,
+                                          dateTime: client.DateOfEntry,
                                          isChanged: false);
 
                 clientsForConsultant.Add(temp);

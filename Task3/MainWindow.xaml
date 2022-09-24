@@ -11,10 +11,65 @@
 
     <Window.Resources>
         <DataTemplate x:Key="CheckBox_Changed">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <CheckBox IsChecked="{Binding Path=IsChanged}" IsEnabled="False"/>
             </StackPanel>
         </DataTemplate>
+
+        <DataTemplate x:Key="InfoChages">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                
+                <TextBlock
+                        Text="{Binding WhoChangedIt}"
+                        FontSize="14" 
+                        FontStyle="Italic" 
+                        FontWeight="Bold">
+                </TextBlock>
+
+                <TextBlock
+                        Text="{Binding WhatChanges}" TextWrapping="Wrap"
+                        FontSize="14" 
+                        FontStyle="Italic" 
+                        Foreground="Red" FontWeight="Bold">
+                </TextBlock>
+
+                <TextBlock
+                        Text="{Binding TypeOfChanges}"
+                        FontSize="14" 
+                        FontStyle="Italic" 
+                        Foreground="Green" FontWeight="Bold">
+                </TextBlock>
+
+                <TextBlock
+                        Text="{Binding DateChenges}"
+                        FontSize="10" 
+                        FontStyle="Italic" 
+                        FontWeight="Bold">
+                </TextBlock>
+
+            </StackPanel>
+            
+        </DataTemplate>
+
+        <DrawingBrush x:Key="MyGridBrushResource" Opacity="0.25"
+             Viewport="0,0,10,10" ViewportUnits="Absolute" TileMode="Tile">
+            <DrawingBrush.Drawing>
+                <DrawingGroup>
+                    <DrawingGroup.Children>
+                        <GeometryDrawing Geometry="M0,0 L1,0 1,1 0,1z" Brush="White" />
+                        <GeometryDrawing Brush="#9999FF">
+                            <GeometryDrawing.Geometry>
+                                <GeometryGroup>
+                                    <RectangleGeometry Rect="0,0,1,0.1" />
+                                    <RectangleGeometry Rect="0,0.1,0.1,0.9" />
+                                </GeometryGroup>
+                            </GeometryDrawing.Geometry>
+                        </GeometryDrawing>
+                    </DrawingGroup.Children>
+                </DrawingGroup>
+            </DrawingBrush.Drawing>
+        </DrawingBrush>
+
     </Window.Resources>
     
     <Window.CommandBindings>
@@ -32,9 +87,15 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="210"/>
         </Grid.ColumnDefinitions>
 
-
+        <ListBox x:Name="СhangesClient"
+                 Grid.Row="1" Grid.Column="2"
+                 Background="{StaticResource MyGridBrushResource}"
+                 Margin="0,10,10,10"
+                 ItemTemplate="{StaticResource InfoChages}">
+        </ListBox>
 
         <!--Основная рабочая область-->
         <Grid Grid.Row="1" Grid.Column="1" Margin="15" Background="White" Cursor="IBeam">
@@ -70,7 +131,8 @@
             </ListView>
         </Grid>
 
-        <StatusBar Grid.Row="3" Grid.ColumnSpan="2" Background="#FF679CC9">
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="3
+                   " Background="#FF679CC9">
             <StatusBarItem>
                 <materialDesign:PackIcon Kind="Lightbulb" Width="20" 
                                              Height="20" Margin="5,0"
@@ -278,7 +340,7 @@
         </StackPanel>
 
         <!--Инструментальная панель-->
-        <Grid Grid.Row="0" Grid.ColumnSpan="2" Background="#FF679CC9">
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" Background="#FF679CC9">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>

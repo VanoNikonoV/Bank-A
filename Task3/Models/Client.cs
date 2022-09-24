@@ -47,13 +47,13 @@ namespace Task3
 
                     (this.FirstName, this.MiddleName,
                      this.SecondName, this.Telefon,
-                     this.SeriesAndPassportNumber, this.IsChanged, 
-                     this.ID, this.DateOfEntry) =
+                     this.SeriesAndPassportNumber, this.DateOfEntry, 
+                     this.ID, this.IsChanged) =
 
                     (firstName, middleName,
                      secondName, telefon,
-                     seriesAndPassportNumber, false, 
-                     Client.NextID(), DateTime.Now);
+                     seriesAndPassportNumber, DateTime.Now, 
+                     Client.NextID(), false);
 
         /// <summary>
         /// Вызывается при редактировании, перезаписывании клиента
@@ -64,9 +64,10 @@ namespace Task3
         /// <param name="telefon"></param>
         /// <param name="seriesAndPassportNumber"></param>
         /// <param name="currentId"></param>
-        public Client(string firstName, string middleName, 
-                          string secondName, string telefon, 
-                          string seriesAndPassportNumber, int currentId, 
+        public Client(string firstName, string middleName,
+                          string secondName, string telefon,
+                          string seriesAndPassportNumber, 
+                          int currentId, DateTime dateTime, 
                           bool isChanged)
 
                           : this(firstName, middleName, secondName, 
@@ -74,10 +75,28 @@ namespace Task3
             {
                 this.ID = currentId; 
                 --id; 
-                this.DateOfEntry = DateTime.Now;
+                this.DateOfEntry = dateTime;
                 this.IsChanged = isChanged;
             }
 
+        // для загрузки данных
+        public Client(string firstName, string middleName,
+                          string secondName, string telefon,
+                          string seriesAndPassportNumber,
+                          DateTime dateTime,
+                          bool isChanged)
+
+                          : this(firstName, middleName, secondName,
+                                 telefon, seriesAndPassportNumber)
+        {
+
+            this.DateOfEntry = dateTime;
+            this.IsChanged = isChanged;
+        }
+
+        /// <summary>
+        /// Имя клиента
+        /// </summary>
         public string FirstName
         {
             get { return this.firstName; }
@@ -87,6 +106,9 @@ namespace Task3
                     OnPropertyChanged(nameof(FirstName));
             }
         }
+        /// <summary>
+        /// Отчество клиента
+        /// </summary>
         public string MiddleName
         {
             get { return this.middleName; }
@@ -94,6 +116,9 @@ namespace Task3
             { this.middleName = value;
                 OnPropertyChanged(nameof(MiddleName)); }
         }
+        /// <summary>
+        /// Фамилия клиента
+        /// </summary>
         public string SecondName
         {
             get { return this.secondName; }
@@ -101,6 +126,9 @@ namespace Task3
             private set { this.secondName = value;
                   OnPropertyChanged(nameof(SecondName));}
         }
+        /// <summary>
+        /// Телефон клиента
+        /// </summary>
         public string Telefon
         {
             get { return this.telefon; }
@@ -112,6 +140,9 @@ namespace Task3
             }
         }
         public int ID { get; private set; }
+        /// <summary>
+        /// Серия и номер паспотра клиента
+        /// </summary>
         public string SeriesAndPassportNumber
         {
             get {return this.seriesAndPassportNumber;}
@@ -122,8 +153,12 @@ namespace Task3
             }
         }
 
-        private bool isChanged;
 
+        #region IsChanged
+        private bool isChanged;
+        /// <summary>
+        /// Индикатор наличия измнений
+        /// </summary>
         public bool IsChanged 
         { 
             get { return this.isChanged; }
@@ -137,8 +172,23 @@ namespace Task3
                
             }
         }
+        #endregion
 
-        public DateTime DateOfEntry { get; set; }
+        #region DateOfEntry
+        private DateTime dateOfEntry;
+        /// <summary>
+        /// Дата внесения изменений
+        /// </summary>
+        public DateTime DateOfEntry 
+        { 
+            get { return this.dateOfEntry; } 
+            set
+            {
+                this.dateOfEntry = value;
+                OnPropertyChanged(nameof(DateOfEntry));
+            }
+        }
+        #endregion
 
         public string WhatHasChanged 
         {
@@ -163,8 +213,10 @@ namespace Task3
         string telefon;
         string seriesAndPassportNumber;
         string error;
+
         #endregion
 
+        #region PropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propName)
         {
@@ -172,11 +224,11 @@ namespace Task3
             {
                 this.IsChanged = true;
 
-                this.WhatHasChanged = propName;
             }
             //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
         }
+        #endregion
 
         /// <summary>
         /// Переопределяю для записи данных в файл .csv
@@ -189,7 +241,8 @@ namespace Task3
                     + MiddleName  + "\t"
                     + SecondName + "\t" 
                     + Telefon + "\t" 
-                    + SeriesAndPassportNumber;
+                    + SeriesAndPassportNumber + "\t"
+                    + DateOfEntry;
         }
 
         /// <summary>
