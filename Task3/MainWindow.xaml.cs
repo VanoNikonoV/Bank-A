@@ -40,9 +40,8 @@ namespace Task3
 
             DataClients.ItemsSource = Consultant.ViewClientsData(ClientsBank.Clone());
 
-            ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
-            
-            Debug.WriteLine(ClientsBank.InfoAboutChanges[0]);
+            //ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
+
 
             #region Сокрытие не функциональных кнопок
 
@@ -62,10 +61,6 @@ namespace Task3
                 foreach (Client p in e.OldItems)
                 {
                     Debug.Write($"Старое имя " + p.FirstName.ToString());
-                    
-                    InformationAboutChanges temp =  ClientsBank.InfoAboutChanges.First(i => i.ID_Client == p.ID);
-
-                    temp.TypeOfChanges = "Клиен был удалени";
 
                 }
 
@@ -81,10 +76,20 @@ namespace Task3
 
             if (e.Action == NotifyCollectionChangedAction.Replace)
             {
-                Console.WriteLine("Here are the OLD items:");
-                foreach (Client p in e.NewItems)
+                string whatChanges = string.Empty;
+
+                foreach (Client o in e.OldItems)
                 {
-                    Console.WriteLine(p.ToString());
+                    whatChanges = o.FirstName;
+
+                    o.InfoChanges.Add(new InformationAboutChanges(DateTime.Now, whatChanges, "замена", nameof(Meneger)));
+
+                }
+
+
+                foreach (Client n in e.NewItems)
+                {
+                    Console.WriteLine(n.ToString());
                 }
                 Console.WriteLine();
             }
@@ -242,12 +247,6 @@ namespace Task3
             {
                 Client changedClient = Meneger.EditNameClient(client, EditName_TextBox.Text.Trim());
 
-                //InformationAboutChanges temp = ClientsBank.InfoAboutChanges.First(i => i.ID_Client == changedClient.ID);
-
-                string s = string.Format("{0} изменилось на  {1}", client.FirstName, EditName_TextBox.Text.Trim());
-
-                ClientsBank.InfoAboutChanges.Add(new InformationAboutChanges(client.ID, DateTime.Now, s, "замена", nameof(Meneger)));
-
                 ClientsBank.EditClient(ClientsBank.IndexOf(client), changedClient);
 
                 isDirty = true;
@@ -320,21 +319,14 @@ namespace Task3
         {
             Client temp = DataClients.SelectedItem as Client;
 
-            PanelInfo.DataContext = DataClients.SelectedItem as Client;
-
-            List<InformationAboutChanges> t = new List<InformationAboutChanges>();
-
-            foreach (var item in ClientsBank.InfoAboutChanges)
+            if (temp != null)
             {
-                if (temp != null)
-                {
-                    if (item.ID_Client == temp.ID) t.Add(item);
-                }
-                
-            }
-            //InformationAboutChanges d = ClientsBank.InfoAboutChanges.First(i => i.ID_Client == temp.ID);
+                PanelInfo.DataContext = temp;
 
-            СhangesClient.ItemsSource = t;
+                СhangesClient.ItemsSource = temp.InfoChanges;
+            }
+            
+           
         }
 
         /// <summary>

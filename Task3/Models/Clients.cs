@@ -9,17 +9,10 @@ namespace Task3
 {
     public partial class Clients : ObservableCollection<Client>, INotifyCollectionChanged
     {
-        /// <summary>
-        /// Коллекция для хранения информации об изменениях в записи о клиенте
-        /// </summary>
-        public ObservableCollection<InformationAboutChanges> InfoAboutChanges { get; set; }
-
-        public Clients() {  }
+         public Clients() {  }
 
         public Clients(string path = "data.csv")  
         {
-            InfoAboutChanges = new ObservableCollection<InformationAboutChanges>();
-
             LoadData(path);  
         }
 
@@ -45,11 +38,11 @@ namespace Task3
         /// <param name="editClient">Отредактируемый клиент по указанному индексу</param>
         public void EditClient(int index, Client editClient) { SetItem(index, editClient);}
 
-        public void EditClient2(int index, Client editClient)
-        {
-            this.RemoveAt(index);
-            this.InsertItem(index, editClient);
-        }
+        //public void EditClient2(int index, Client editClient)
+        //{
+        //    this.RemoveAt(index);
+        //    this.InsertItem(index, editClient);
+        //}
 
         /// <summary>
         /// Загружает данные о клиентах из файла data.csv
@@ -68,17 +61,13 @@ namespace Task3
                         {
                             string[] line = reader.ReadLine().Split('\t');
 
-                            Client temp = new Client(firstName: line[1],
+                            this.Add(new Client(firstName: line[1],
                                                     middleName: line[2],
                                                     secondName: line[3],
                                                        telefon: line[4],
                                        seriesAndPassportNumber: line[5],
                                                       dateTime: Convert.ToDateTime(line[6]),
-                                                     isChanged: false); //currentId: Convert.ToInt32(line[0]),
-
-                            this.Add(temp);
-
-                           // InfoAboutChanges.Add(new InformationAboutChanges(temp.ID, temp.DateOfEntry));
+                                                     isChanged: false)); 
                         }
                     }
                    

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 
 namespace Task3
@@ -7,14 +9,6 @@ namespace Task3
 /// Класс описывающий модель клиента
 /// </summary>
 {
-    //Расширяем и изменяем программу из задания 1 и 2.
-    //У нас есть два класса для консультанта и менеджера.
-    //У классов есть метод изменения данных. Исходя из этого, добавьте к данным из задания 1 дополнительные поля:
-    //      дата и время изменения записи;
-    //      какие данные изменены;
-    //      тип изменений;
-    //      кто изменил данные(консультант или менеджер).
-
     public class Client : INotifyPropertyChanged, IDataErrorInfo
     {
         #region Статический конструктор
@@ -153,6 +147,19 @@ namespace Task3
             }
         }
 
+        #region InfoChanges
+        private List<InformationAboutChanges> infoChanges = new List<InformationAboutChanges>();
+
+        public List<InformationAboutChanges> InfoChanges 
+        { 
+            get { return this.infoChanges; }
+            set 
+            { 
+                this.infoChanges = value;
+                OnPropertyChanged(nameof(InfoChanges));
+            }
+        }
+        #endregion
 
         #region IsChanged
         private bool isChanged;
@@ -189,22 +196,6 @@ namespace Task3
             }
         }
         #endregion
-
-        public string WhatHasChanged 
-        {
-            get
-            {
-                if (IsChanged == true)
-                {
-                    return this.whatHasChanged;
-                }
-                else return this.whatHasChanged;
-            }
-            private set { this.whatHasChanged = value; }
-        }
-
-        private string whatHasChanged = string.Empty;
-        public string WhoChangedIt { get; set; }
 
         #region Поля
         string firstName;

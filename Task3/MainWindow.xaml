@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Task2"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Height="760" Width="1580"
+        Height="760" Width="1680"
         MinWidth="1280" MinHeight="700" WindowStyle="None">
 
     <Window.Resources>
@@ -20,31 +20,28 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                 
                 <TextBlock
-                        Text="{Binding WhoChangedIt}"
+                        Text="{Binding StringFormat=Кто внес изменения: {0}, Path=WhoChangedIt}"
                         FontSize="14" 
-                        FontStyle="Italic" 
                         FontWeight="Bold">
                 </TextBlock>
 
                 <TextBlock
-                        Text="{Binding WhatChanges}" TextWrapping="Wrap"
+                        Text="{Binding StringFormat=Измения: {0},Path=WhatChanges}" TextWrapping="Wrap"
                         FontSize="14" 
-                        FontStyle="Italic" 
                         Foreground="Red" FontWeight="Bold">
                 </TextBlock>
 
                 <TextBlock
-                        Text="{Binding TypeOfChanges}"
-                        FontSize="14" 
-                        FontStyle="Italic" 
+                        Text="{Binding StringFormat=Тип изменений: {0},Path=TypeOfChanges}"
+                        FontSize="14"  
                         Foreground="Green" FontWeight="Bold">
                 </TextBlock>
 
                 <TextBlock
                         Text="{Binding DateChenges}"
                         FontSize="10" 
-                        FontStyle="Italic" 
-                        FontWeight="Bold">
+                        FontWeight="Bold"
+                        HorizontalAlignment="Right">
                 </TextBlock>
 
             </StackPanel>
@@ -87,13 +84,22 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="210"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="210"/>
+            <ColumnDefinition Width="310"/>
         </Grid.ColumnDefinitions>
 
+        <!--Список изменений-->
+        <TextBlock Grid.Row="1" Grid.Column="2"
+                   Text="Список изменений"
+                   FontSize="20"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,20,0,0">
+        </TextBlock>
+        
         <ListBox x:Name="СhangesClient"
                  Grid.Row="1" Grid.Column="2"
                  Background="{StaticResource MyGridBrushResource}"
-                 Margin="0,10,10,10"
+                 Margin="0,80,10,10"
                  ItemTemplate="{StaticResource InfoChages}">
         </ListBox>
 

@@ -2,23 +2,22 @@
 
 namespace Task3
 {
-    public partial class Clients
-    {
+   
         /// <summary>
         /// Информаци об измененияих в записи о клиенте
         /// </summary>
         public class InformationAboutChanges
         {
-            public InformationAboutChanges( int id_client, DateTime dateTime, 
+            public InformationAboutChanges( DateTime dateTime, 
                                             string whatChanges = "", 
                                             string typeOfChanges = "", 
                                             string whoChangedIt = "") =>
             
-                (this.ID_Client, this.DateChenges, 
+                (this.DateChenges, 
                 this.WhatChanges, this.TypeOfChanges, 
                 this.WhoChangedIt) =
 
-                (id_client ,dateTime, whatChanges, 
+                (dateTime, whatChanges, 
                 typeOfChanges, whoChangedIt);
             
             /// <summary>
@@ -37,11 +36,8 @@ namespace Task3
             /// Кто произмел изменение
             /// </summary>
             public string WhoChangedIt { get; set; }
-            /// <summary>
-            /// ID клиента
-            /// </summary>
-            public int ID_Client { get; set; }
+ 
         }
 
-    }
+    
 }
