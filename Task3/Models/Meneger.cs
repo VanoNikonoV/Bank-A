@@ -19,6 +19,18 @@ namespace Task3
             return clients;
         }
 
+        public new Client EditeClient(Client client, string newTelefon)
+        {
+            base.EditeClient(client, newTelefon);
+
+            var x = client.InfoChanges[client.InfoChanges.Count-1];
+
+            x.WhoChangedIt = nameof(Meneger);
+
+            return client;
+                
+        }
+
         /// <summary>
         /// Метод редактирования имени
         /// </summary>

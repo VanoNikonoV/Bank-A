@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace Task3
 {
-    public partial class Clients : ObservableCollection<Client>, INotifyCollectionChanged
+    public class Clients : ObservableCollection<Client>, INotifyCollectionChanged
     {
-         public Clients() {  }
+        public Clients() {  }
 
         public Clients(string path = "data.csv")  
         {
@@ -37,12 +37,6 @@ namespace Task3
         /// <param name="index">Индекс (с нуля) элемента, который требуется заменить</param>
         /// <param name="editClient">Отредактируемый клиент по указанному индексу</param>
         public void EditClient(int index, Client editClient) { SetItem(index, editClient);}
-
-        //public void EditClient2(int index, Client editClient)
-        //{
-        //    this.RemoveAt(index);
-        //    this.InsertItem(index, editClient);
-        //}
 
         /// <summary>
         /// Загружает данные о клиентах из файла data.csv

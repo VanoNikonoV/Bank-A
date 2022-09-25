@@ -17,9 +17,9 @@ namespace Task3
         /// <param name="client">Клиент чей номер необходимо отредактировать</param>
         /// <param name="newData">Новый номер</param>
         /// <returns>Клент с новым номером</returns>
-        public Client EditeClient(Client client, string newData)
+        public Client EditeClient(Client client, string newTelefon)
         {
-            client.Telefon = newData;
+            client.Telefon = newTelefon;
 
             client.DateOfEntry = DateTime.Now;
 

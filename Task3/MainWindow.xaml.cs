@@ -42,7 +42,6 @@ namespace Task3
 
             //ClientsBank.CollectionChanged += ClientsBank_CollectionChanged;
 
-
             #region Сокрытие не функциональных кнопок
 
             EditName_Button.IsEnabled = false;
@@ -208,7 +207,7 @@ namespace Task3
         {
             var client = DataClients.SelectedItem as Client;
 
-            string oldTelefon = client.Telefon;
+            string whatChanges = string.Format(client.Telefon + @" на " + EditTelefon_TextBox.Text.Trim());
 
             if (client != null)
             {
@@ -222,14 +221,27 @@ namespace Task3
 
                     editClient.Telefon = EditTelefon_TextBox.Text.Trim();
 
+                    switch (AccessLevel_ComboBox.SelectedIndex)
+                    {
+                        case 0: //консультант
+
+                            editClient.InfoChanges.Add(new InformationAboutChanges(DateTime.Now, whatChanges, "замена", nameof(Consultant)));
+
+                            break;
+
+                        case 1: //менждер
+
+                            editClient.InfoChanges.Add(new InformationAboutChanges(DateTime.Now, whatChanges, "замена", nameof(Meneger)));
+
+                            break;
+
+                        default:
+                            break;
+                    }
+
                     isDirty = true;
                 }
-                else
-                {
-                    //Consultant.EditeClient(client, oldTelefon);
-
-                    ShowStatusBarText("Исправте не корректные данные");
-                }
+                else { ShowStatusBarText("Исправте не корректные данные"); }
             }
             else ShowStatusBarText("Выберите клиента");
         }
@@ -325,8 +337,6 @@ namespace Task3
 
                 СhangesClient.ItemsSource = temp.InfoChanges;
             }
-            
-           
         }
 
         /// <summary>
